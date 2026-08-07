@@ -1,0 +1,16 @@
+{
+  "servers": [
+    {
+      "id": "t5565",
+      "name": "HP t5565",
+      "host": "192.168.0.44",
+      "port": 22,
+      "user": "root",
+      "auth": "password",
+      "password": "ваш_пароль_здесь",   // обязательно, если auth = "password"
+      "key_path": "",                    // обязательно, если auth = "key" и файл существует
+      "projects_dir": "/mnt/data/projects",
+      "flash_mount": "/mnt/data"
+    }
+  ]
+}

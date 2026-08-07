@@ -1,0 +1,5 @@
+pywebview>=4.4
+pystray>=0.19
+paramiko>=3.4
+pillow>=10.0
+pytest>=7.0

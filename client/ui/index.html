@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>SrvMan</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <main class="content">
+    <div id="emptyState" class="empty-state hidden">
+      <p>Выберите сервер или добавьте новый.</p>
+    </div>
+
+    <div id="dashboard" class="dashboard">
+      <header class="dash-header">
+        <h1 id="serverTitle">—</h1>
+        <div class="header-actions">
+          <button id="btnAddServer" class="icon-btn" title="Добавить сервер">+</button>
+          <button id="btnDeploy" class="btn btn-primary">+ Деплой проекта</button>
+          <button id="btnEditServer" class="icon-btn" title="Настройки сервера">⚙</button>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="card">
+          <div class="card-label">Аптайм</div>
+          <div id="cardUptime" class="card-value">—</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Load average (1/5/15)</div>
+          <div id="cardLoad" class="card-value">—</div>
+        </div>
+        <div class="card">
+          <div class="card-label">RAM</div>
+          <div id="cardRam" class="card-value">—</div>
+          <div class="card-bar"><div id="barRam" class="card-bar-fill"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-label">Swap</div>
+          <div id="cardSwap" class="card-value">—</div>
+          <div class="card-bar"><div id="barSwap" class="card-bar-fill"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-label">Диск (система)</div>
+          <div id="cardDiskRoot" class="card-value">—</div>
+          <div class="card-bar"><div id="barDiskRoot" class="card-bar-fill"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-label">Диск (флешка/проекты)</div>
+          <div id="cardDiskFlash" class="card-value">—</div>
+          <div class="card-bar"><div id="barDiskFlash" class="card-bar-fill"></div></div>
+        </div>
+      </section>
+
+      <section class="services-section">
+        <h2>Проекты / службы</h2>
+        <table class="services-table">
+          <thead>
+            <tr>
+              <th>Имя</th><th>Тип</th><th>Статус</th><th>Ветка</th><th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="servicesBody"></tbody>
+        </table>
+        <p id="noServices" class="muted hidden">Нет развёрнутых проектов.</p>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div id="modalOverlay" class="modal-overlay hidden">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
