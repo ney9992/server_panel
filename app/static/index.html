@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Server Panel</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div id="login" class="login-screen" hidden>
+    <form id="login-form" class="login-box">
+      <div class="brand">server<span>panel</span></div>
+      <input id="user" type="text" autocomplete="username" placeholder="Логин" value="admin" required>
+      <input id="password" type="password" autocomplete="current-password" placeholder="Пароль" required>
+      <button type="submit" class="primary">Войти</button>
+      <p class="error" id="login-error" role="alert"></p>
+    </form>
+  </div>
+  <div id="dashboard" class="shell" hidden>
+    <header>
+      <div class="brand">server<span>panel</span></div>
+      <nav>
+        <button type="button" class="nav active" data-page="media">Медиа</button>
+        <button type="button" class="nav" data-page="downloads">Загрузки <span id="count" class="count"></span></button>
+      </nav>
+      <button class="icon-button logout" id="logout" aria-label="Выйти">⎋</button>
+    </header>
+    <main>
+      <div id="media-page">
+        <div class="section-bar">
+          <h1>Медиатека</h1>
+          <div class="tabs" id="kinds">
+            <button data-kind="movies" class="selected">Фильмы</button>
+            <button data-kind="series">Сериалы</button>
+            <button data-kind="music">Музыка</button>
+          </div>
+        </div>
+        <section class="drop-area" id="drop-area" tabindex="0" role="button" aria-label="Добавить файлы">
+          <div class="drop-symbol">＋</div>
+          <strong>Перетащить файлы</strong>
+          <button class="subtle" id="browse" type="button">Выбрать</button>
+          <input type="file" id="file-input" multiple hidden>
+        </section>
+        <section class="torrent-form">
+          <form id="torrent-form" class="link-row">
+            <input id="torrent-link" type="text" autocomplete="off" spellcheck="false" placeholder="Magnet или ссылка на торрент" required>
+            <button type="submit" class="primary icon-add" aria-label="Добавить торрент">＋</button>
+          </form>
+        </section>
+        <div id="upload-jobs" class="upload-jobs"></div>
+        <div class="section-bar library-heading"><h2>Файлы</h2><span id="file-count" class="muted"></span></div>
+        <div id="library" class="library"></div>
+      </div>
+      <div id="downloads-page" hidden>
+        <div class="section-bar"><h1>Загрузки</h1><span id="torrent-state" class="muted"></span></div>
+        <div id="torrents" class="library"></div>
+      </div>
+    </main>
+    <footer><span id="disk">—</span><span class="links"><a id="jellyfin-link" target="_blank" rel="noopener noreferrer">Jellyfin</a><a id="navidrome-link" target="_blank" rel="noopener noreferrer">Navidrome</a></span></footer>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>

@@ -1,8 +1,10 @@
+.env
+.env.*
+!.env.example
+data/
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
 .venv/
-venv/
-config.local.json
-*.log
-dist/
-build/
+.idea/
+.DS_Store

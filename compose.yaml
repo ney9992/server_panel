@@ -1,0 +1,56 @@
+services:
+  panel:
+    build: .
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    env_file: .env
+    environment:
+      DATA_ROOT: /data
+      QBIT_URL: http://qbittorrent:8080
+    ports:
+      - "${PANEL_BIND:-127.0.0.1}:8090:8000"
+    volumes:
+      - ./data:/data
+    depends_on:
+      - qbittorrent
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      TZ: ${TZ:-Europe/Berlin}
+      WEBUI_PORT: 8080
+      TORRENTING_PORT: 6881
+    volumes:
+      - ./data/qbittorrent:/config
+      - ./data:/data
+    ports:
+      - "127.0.0.1:8081:8080"
+      - "6881:6881/tcp"
+      - "6881:6881/udp"
+
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    volumes:
+      - ./data/jellyfin/config:/config
+      - ./data/jellyfin/cache:/cache
+      - ./data/media:/media:ro
+    ports:
+      - "${MEDIA_BIND:-127.0.0.1}:8096:8096"
+
+  navidrome:
+    image: deluan/navidrome:latest
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    environment:
+      ND_MUSICFOLDER: /music
+      ND_DATAFOLDER: /data
+    volumes:
+      - ./data/navidrome:/data
+      - ./data/media/music:/music:ro
+    ports:
+      - "${MEDIA_BIND:-127.0.0.1}:4533:4533"
