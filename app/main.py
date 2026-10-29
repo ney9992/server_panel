@@ -35,7 +35,7 @@ SECURE_COOKIE = os.getenv('COOKIE_SECURE', 'false').lower() in ('true', '1')
 SESSION_AGE = 60 * 60 * 24 * 14
 STATIC = Path(__file__).resolve().parent / 'static'
 
-if not PASSWORD or not SECRET or len(SECRET) < 32:
+if not PASSWORD or PASSWORD.startswith('REPLACE_') or not SECRET or SECRET.startswith('REPLACE_') or len(SECRET) < 32:
     raise RuntimeError('Задайте PANEL_PASSWORD и PANEL_SECRET (минимум 32 символа)')
 
 signer = URLSafeTimedSerializer(SECRET, salt='server-panel-session')
